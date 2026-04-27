@@ -1,0 +1,539 @@
+\documentclass[12pt, a4paper]{article}
+
+\setlength{\parindent}{0pt}
+
+% Packages essentiels
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{mathptmx} % Times New Roman
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{pdfpages}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{parskip}
+
+%highlight
+\usepackage{soul}
+\usepackage{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{csquotes}
+\usepackage{xurl}
+\usepackage{hyperref}%[hidelinks]
+\usepackage{apacite}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Marges : 2.5 cm gauche/droite, 3 cm haut/bas (avec pagination)
+\usepackage[left=2.5cm, right=2.5cm, top=3cm, bottom=3cm]{geometry}
+
+% Colonnes tabularx avec alignement à gauche pour éviter les underfull hbox
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+% Interligne 1.5
+\onehalfspacing
+
+% Correction headheight pour fancyhdr
+\setlength{\headheight}{14.5pt}
+\addtolength{\topmargin}{-2.5pt}
+
+% Configuration de l'en-tête et pagination
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage.}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Compteur pour les annexes (permet \ref sans numérotation automatique)
+\newcounter{annexe}
+
+% Subsubsection (alinéas) : italique
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\itshape}{\thesubsubsection}{1em}{}
+
+\begin{document}
+
+
+
+% Page de garde
+\pagestyle{empty}
+\includepdf[pages=-]{media/front.pdf}
+
+\newpage
+\tableofcontents
+
+\newpage
+\setcounter{page}{1}
+\pagestyle{fancy}
+\section*{Glossaire}
+\addcontentsline{toc}{section}{Glossaire}
+
+\begin{description}[leftmargin=4.5cm, style=sameline, font=\normalfont\bfseries]
+  \item[ARPU] \textit{Average Revenue Per User} — revenu moyen généré par utilisateur actif sur une période donnée.
+  \item[Magic link] Lien d'authentification unique envoyé par email permettant de se connecter sans mot de passe.
+  \item[Onboarding] Processus d'activation et d'accompagnement d'un nouvel utilisateur lors de ses premières interactions avec un produit ou service.
+  \item[OTP] \textit{One-Time Password} — code d'authentification à usage unique, généralement à six chiffres, valable pour une seule connexion.
+  \item[POS] \textit{Point of Sale} — système de caisse électronique utilisé par les établissements pour gérer les transactions et, le cas échéant, le suivi des stocks.
+\end{description}
+
+\newpage
+
+\section{Introduction}
+
+Le présent rapport traite le Cas n°7, Gestion de la relation client et rétention, appliqué à
+Winevizer, une startup SaaS belge proposant un sommelier virtuel aux établissements Horeca.
+Il s'articule en trois parties~: un premier diagnostic centré sur l'entreprise et son profil
+entrepreneurial~; un second diagnostic focalisé sur la problématique, mobilisant
+le Value Proposition Canvas et la chaîne de valeur de Porter; ainsi qu'un
+volet de recommandations opérationnelles.
+
+Lors de la présentation du cas, l'entrepreneur sollicitait un appui sur plusieurs axes~:
+l'optimisation du tunnel de vente, la gestion automatique des échecs d'abonnement, et les
+stratégies de fidélisation visant à limiter le churn. Les chiffres de Winevizer nous ont
+toutefois conduits à recentrer l'analyse sur le premier~: le churn des abonnés payants reste
+contenu ($\sim$10\,\% sur trois ans), tandis que près de 90\,\% des comptes créés n'atteignent
+jamais l'abonnement. C'est donc la phase d'onboarding qui structure le diagnostic et les
+recommandations qui suivent.
+
+\section*{PARTIE 1 – Diagnostic : Focus sur l'entreprise}
+\addcontentsline{toc}{section}{Partie 1 – Diagnostic : Focus sur l'entreprise}
+
+\section{Présentation de l'entreprise}
+
+Le secteur Horeca est aujourd'hui sous pression~: pénurie de sommeliers, rotation élevée du personnel
+de salle peu formé (étudiants, flexi-jobs) et marges fortement dépendantes de la vente de vin
+(30 à 40\,\% du chiffre d'affaires d'un restaurant traditionnel). Dans ce contexte, le conseil œnologique au
+client final reste un levier sous-exploité. C'est sur ce constat qu'a été fondée Winevizer en
+2021, par Sébastien Demoustiez, au sortir de la crise sanitaire.
+
+Winevizer est une solution SaaS B2B dont le cœur de valeur est un sommelier virtuel accessible
+au client final via QR code ou tablette~: l'outil guide le convive à travers des accords mets-vins
+ou un questionnaire de préférences, et lui propose une sélection restreinte aux vins effectivement
+en stock dans l'établissement. Il intègre également une carte des vins digitale, connectée, si le
+restaurateur le souhaite, à son système de gestion de stock existant.
+
+Malgré une proposition de valeur distinctive et un référencement naturel parmi les meilleurs
+de son marché, Winevizer fait face à une difficulté structurelle~: sur 585 comptes créés depuis
+le lancement, seuls 62 ont souscrit un abonnement et 45 sont aujourd'hui actifs, soit un taux de
+conversion global d'environ 10,6\,\%. La majorité des utilisateurs abandonnent très tôt dans le
+parcours, avant même d'avoir expérimenté le sommelier virtuel.
+
+La fiche d'identité complète de Winevizer (statut, modèle économique, indicateurs clés) est
+présentée en Annexe~\ref{annexe:identite}, tandis qu'une matrice SWOT synthétisant l'ensemble
+des analyses menées au fil du diagnostic figure en Annexe~\ref{annexe:swot}.
+
+\section*{PARTIE 2 – Diagnostic : Focus sur la problématique}
+\addcontentsline{toc}{section}{Partie 2 – Diagnostic : Focus sur la problématique}
+
+\section{Value Proposition Canvas~: focus sur le fit et le misfit}
+
+\subsection{Customer Profile}
+
+Le client cible est le restaurateur indépendant ou le patron de bar à vins, généralement
+propriétaire-opérateur, qui peut cumuler les fonctions de gestion, de cuisine et de salle.
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Customer Jobs (ce que le client cherche à accomplir) :
+        maximiser la marge par couvert (la vente de vin représente
+        30 à 40\,\% du chiffre d'affaires d'un restaurant traditionnel et autorise des
+        coefficients multiplicateurs de 3 à 5)~; offrir un service de qualité homogène
+        malgré une rotation de personnel élevée~; maintenir une carte à jour en temps
+        réel~; se libérer de tâches
+        administratives chronophages pour se concentrer sur le cœur de métier (cuisine,
+        accueil, sélection)~; projeter une image professionnelle, se
+        différencier des concurrents.
+
+  \item Pains :
+        pénurie chronique de sommeliers qualifiés (présents dans moins de 5\,\% des
+        établissements) et coût prohibitif de leur recrutement~; personnel de salle
+        majoritairement composé d'étudiants et de flexi-jobs, difficile à former sur le
+        vin~; clients finaux déçus par un vin mal choisi, avec impact direct sur
+        l'addition et le pourboire~; réimpression coûteuse et tardive des cartes papier,
+        condamnant l'établissement à présenter un inventaire périmé ou incomplet~;
+        difficulté de proposer un conseil multilingue à une clientèle internationale.
+
+  \item Gains :
+        ticket moyen plus élevé grâce à la vente de vins de gamme supérieure~; baisse de la
+        dépendance au niveau de qualification du personnel~; meilleure satisfaction et
+        fidélisation des clients finaux~; visibilité sur les préférences réelles de la
+        clientèle pour ajuster les achats de cave~; simplification opérationnelle
+        globale.
+\end{itemize}
+
+\subsection{Value Proposition}
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Products \& Services : le produit central est un sommelier virtuel
+        combinant~: une base de données couvrant $\sim$95\,\% des vins
+        commercialisés dans le monde~; un algorithme de recommandation croisant accords
+        mets-vins et préférences aromatiques~; une carte digitale consultable en 7
+        langues via QR code ou tablette~; un outil de gestion avec imports CSV,
+        manuel ou PDF (lecture automatisée par IA)~; une synchronisation optionnelle
+        avec les systèmes de gestion de stock existants du restaurateur~; 
+        un tableau de bord statistique qui permet
+        d'ajuster la cave aux préférences observées~; une version PDF imprimable de la
+        carte~; un support client assuré par le fondateur lui-même.
+
+  \item Pain Relievers :
+        le sommelier virtuel se substitue au recrutement d'un sommelier humain et à la
+        formation du personnel de salle, neutralisant coût et pénurie~; la carte digitale
+        synchronisée supprime le cycle de réimpression~; le multilinguisme natif répond
+        au besoin d'une clientèle internationale~; l'interface en libre-service permet
+        au client final de décider sans solliciter un serveur non formé.
+
+  \item Gain Creators :
+        l'algorithme oriente le client vers des choix mieux adaptés à son plat et à ses
+        goûts, ce qui accroît le ticket moyen et la satisfaction~; les statistiques
+        d'usage révèlent les préférences latentes (par exemple une surreprésentation
+        des recherches de blancs légers non reflétée dans la cave) et transforment la
+        gestion de carte en décision pilotée par la donnée~; le prix d'entrée
+        (24,99\,€/mois) rend l'adoption financièrement abordable à l'échelle d'un établissement.
+\end{itemize}
+
+\subsection{Synthèse~: Fit et Misfit comme levier de rétention}
+
+Sur le fond, l'adéquation entre l'offre et le profil client est forte~: les gain
+creators et les pain relievers de Winevizer répondent directement aux
+jobs et aux pains du restaurateur cible, en particulier sur la pénurie
+de compétences œnologiques et sur l'obsolescence des cartes papier. Le Fit
+stratégique est donc validé, ce qui est cohérent avec le fait que, parmi les
+utilisateurs qui déploient réellement la carte dans leur établissement, 20 à 25\,\%
+convertissent à l'abonnement payant.
+
+Le misfit ne se situe pas dans ce que Winevizer fait, mais dans quand
+et comment la valeur est rendue accessible. Notre analyse du parcours
+d'onboarding (landing page, création de compte, confirmation email, création de
+l'établissement, encodage de la carte, etc.) révèle une friction
+cumulative importante avant que l'utilisateur n'atteigne la seule fonctionnalité qui
+porte réellement la valeur, à savoir le sommelier virtuel opérationnel dans son établissement.
+Les principaux écarts identifiés sont~:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item Décalage de discours en haut de funnel~: la page d'accueil met principalement
+        en avant des bénéfices fonctionnels (absence de réimpression, QR code, tablette)
+        plutôt que l'impact métier. Des indicateurs de ROI existent bien sur le site
+        (ils figurent dans un onglet distinct) mais ne sont pas mis en avant.
+        Le prospect ne dispose donc pas d'emblée du cadre d'évaluation financier qui
+        justifierait son investissement en temps dans la phase d'essai.
+
+  \item Signaux de confiance peu visibles~: des témoignages clients figurent sur le
+        site mais se trouvent également dans un autre onglet~; leur crédibilité est en outre
+        douteuse, faute de nom d'établissement, de logo ou de photo (les mentions se
+        réduisent à \og{}un restaurant à Bruxelles\fg{}, \og{}un bistro à Lyon\fg{}, etc.)~;
+        la mention de partenaires existe mais est reléguée dans le pied de page~; liste des
+        intégrations POS supportées non mise en avant.
+
+  \item Onboarding trop long avant la première valeur perçue : le parcours cumule
+        plusieurs frictions successives (inscription lourde, paywall sur la méthode
+        d'import la plus naturelle, délai de traitement des vins, etc.) sans qu'aucune 
+        valeur intermédiaire ne soit délivrée en chemin. Ces étapes relèvent toutefois 
+        davantage du fonctionnement opérationnel
+        de l'outil que du VPC~: elles sont donc décrites en détail dans la section
+        suivante consacrée à la chaîne de valeur (cf.~section~\ref{sec:porter}).
+
+\end{itemize}
+
+Cette analyse suggère que la valeur de la solution devient perceptible trop tard
+dans le parcours. Autrement dit, avant d'atteindre le moment où l'utilité concrète de
+Winevizer apparaît, l'utilisateur a déjà dû franchir plusieurs étapes qui mobilisent du
+temps et de l'attention. Le frein semble donc moins tenir à une pénibilité intrinsèque
+de l'onboarding seul qu'au décalage entre l'effort demandé et le moment où le bénéfice
+devient visible.
+
+\section{Chaîne de valeur de Porter~: focus sur la logistique interne}
+\label{sec:porter}
+
+L'activité primaire la plus directement exposée au problème de rétention est la logistique
+interne, assimilable ici à l'onboarding. En pratique,
+on observe deux parcours différents, sans vraie explication sur lequel privilégier.
+
+\subsection{Parcours principal~: inscription puis construction guidée de la carte}
+
+Ce parcours, accessible depuis le bouton \og{}connexion / inscription\fg{}, enchaîne six
+étapes~:
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item Création du compte. Deux voies coexistent~: un social login
+        Google / Facebook en un clic, ou une création manuelle qui demande cinq champs obligatoires
+        (Prénom, Nom, Email, Mot de passe, Confirmation du mot de passe) et l'acceptation des
+        conditions générales. La règle de longueur minimale du mot de passe (8 caractères) n'est
+        affichée qu'après saisie, ce qui génère une correction a posteriori plutôt qu'une
+        saisie réussie du premier coup.
+
+  \item Confirmation de l'adresse email. Un popup invite l'utilisateur à
+        consulter sa boîte de réception et à cliquer sur un lien \og{}Confirmer mon email\fg{}~;
+        le clic authentifie alors automatiquement le compte. Deux anomalies ont été observées
+        à cette étape. D'une part, le lien affiche occasionnellement un message \og{}lien
+        expiré\fg{} alors qu'il vient d'être reçu, comportement non systématique et donc
+        difficile à diagnostiquer. D'autre part, il est possible de
+        contourner entièrement cette étape~: en revenant sur l'écran de connexion sans
+        confirmer l'email, l'authentification fonctionne quand même, ce qui interroge sur
+        l'utilité réelle du mail de validation et introduit une friction sans bénéfice.
+
+  \item Création de l'établissement. Une fois dans l'application, un popup
+        de progression annonce quatre étapes à franchir~: (1)~\og{}Créez votre établissement\fg{},
+        (2)~\og{}Créez votre carte des vins\fg{}, (3)~\og{}Adaptez votre carte des vins\fg{},
+        (4)~\og{}Générez votre QR code\fg{}. La première requiert huit champs obligatoires~:
+        nom de l'établissement, type d'établissement, rue, numéro / boîte, pays, devise, ville,
+        code postal. L'utilisateur n'a encore interagi avec aucune fonctionnalité liée au vin.
+
+  \item Encodage de la carte. Trois méthodes sont proposées~: import CSV, saisie
+        manuelle (mode simple ou avancé), ou import par PDF / photo avec lecture automatisée
+        par IA. La troisième, la plus naturelle pour un restaurateur disposant déjà d'une
+        carte papier, est cependant verrouillée derrière le paywall (\og{}Cette méthode n'est
+        disponible que pour les utilisateurs avec un plan payant\fg{}). Les utilisateurs en
+        essai sont donc rabattus sur les deux méthodes les plus coûteuses en temps au moment
+        précis où ils évaluent l'outil.
+
+  \item Traitement IA et \og{}Adaptation de la carte\fg{}~: une fois les vins soumis,
+        un message indique qu'il faut attendre l'identification automatique des vins~;
+        l'utilisateur valide par \og{}OK, j'ai compris\fg{} et se retrouve dans l'application
+        sans consigne claire sur la suite. Le délai peut atteindre plusieurs heures~; pendant
+        ce temps, aucune valeur intermédiaire n'est délivrée.
+
+  \item Génération du QR code~: l'étape finale, celle qui rend la carte réellement
+        exploitable en salle, n'est pas guidée et reste difficile à localiser dans
+        l'interface, ce qui allonge encore le délai avant le premier scan.
+\end{enumerate}
+
+À ces six étapes s'ajoutent des problèmes transverses. D'abord, la landing page présente
+des défauts de finition perceptibles~: animations saccadées, vidéos surdimensionnées. Ces
+éléments passent inaperçus pour un utilisateur peu technophile, mais peuvent nuire à
+l'impression de qualité aux yeux d'un prospect plus averti. Ensuite, l'application propose une interface de type
+chatbot~; en pratique, celle-ci ne répond pas automatiquement mais transfère le
+message au support, qui répond par email ultérieurement. L'écart entre l'attente (réponse
+immédiate) et la réalité (réponse asynchrone) fragilise l'expérience au moment exact où
+l'utilisateur est bloqué.
+
+\subsection{Parcours alternatif~: upload PDF direct depuis la landing page}
+
+Un second parcours est accessible sans création de compte préalable. Plus bas sur la page
+d'accueil, un bloc \og{}Transformez votre carte des vins papier en carte digitale\fg{} permet
+de soumettre trois éléments seulement~: une adresse email, le nom de l'établissement et un
+fichier (PDF ou photo). Environ deux heures plus tard, l'utilisateur reçoit un email contenant
+un lien vers sa carte digitale déjà constituée.
+
+Ce chemin est à la fois plus court et plus aligné avec le besoin du restaurateur. Il fait
+toutefois apparaître une incohérence majeure avec le parcours
+principal~: l'import par PDF, présenté comme réservé aux comptes payants dans le tunnel
+d'inscription classique, est ici librement accessible depuis la landing page. Deux portes
+d'entrée coexistent donc pour la même fonctionnalité, avec des règles d'accès opposées, sans
+que l'utilisateur ne soit orienté vers la plus appropriée.
+
+Ce parcours présente en outre une fragilité propre dans sa seconde phase. Une fois le
+délai de traitement écoulé, l'utilisateur reçoit un email contenant un aperçu de sa carte
+(versions papier et digitale) et un lien \og{}Connectez-vous pour modifier votre carte
+digitale\fg{} qui renvoie vers un formulaire de finalisation de compte. Ce lien constitue
+l'unique porte d'accès au compte nouvellement créé~: si l'utilisateur archive ou supprime
+l'email par mégarde, aucune récupération n'est possible sans solliciter le support, et
+l'import comme le délai d'attente ont été consentis pour rien.
+
+\section*{PARTIE 3 – Consultance : Recommandations}
+\addcontentsline{toc}{section}{Partie 3 – Consultance : Recommandations}
+
+Les recommandations ci-dessous sont des pistes, non des prescriptions. Il appartient au
+fondateur de juger, pour chacune, si elle est pertinente dans son contexte, comment la mettre
+en œuvre, et avec lesquelles d'autres la combiner.
+
+\subsection{R1 — Recentrer le discours de la landing page sur le ROI}
+
+Pour pallier le décalage de discours en haut du funnel, il serait pertinent de faire
+apparaître les indicateurs d'impact métier dès la section principale de la page d'accueil.
+Les concurrents directs ont fait ce choix~: Somm'it annonce d'emblée \og{}Gagnez trois points de
+marge\fg{}, Coena \og{}+20\,\% de CA vins\fg{}, AsterFox \og{}Augmentez votre chiffre
+d'affaires\fg{}. Rendre ces informations plus visibles 
+permettrait de donner au prospect le cadre d'évaluation financier plus rapidement.
+
+\subsection{R2 — Renforcer la preuve sociale sur la landing page}
+
+À l'image des concurrents, qui affichent des témoignages identifiés dès leur page
+d'accueil, il serait pertinent de remplacer les mentions actuelles par des références
+nominatives (nom et logo de l'établissement), de les faire remonter
+en section principale, et de sortir les partenaires du pied de page pour les afficher en
+position prominente.
+
+\subsection{R3 — Afficher les intégrations POS sur la landing page}
+
+Dans la même logique, et là encore à l'image des concurrents, afficher les logos des systèmes
+de POS compatibles sur la page d'accueil et créer une page \og{}Intégrations\fg{} dédiée
+permettrait de désamorcer l'objection de compatibilité avant même l'inscription.
+
+\subsection{R4 — Corriger les défauts visuels de la landing page}
+
+D'une part, plusieurs éléments graphiques de la page apparaissent trop lentement
+~: l'aperçu des versions smartphone et tablette de la carte lors des
+transitions, mais aussi le logo Winevizer et les icônes de drapeaux de langue (entre autres).
+D'autre part, la vidéo de
+présentation dans la partie \og{}Vidéos \& Tutoriels\fg{} déborde des limites visibles de l'écran.
+Ces corrections sont rapides à réaliser, mais leur absence donne une impression peu
+professionnelle 
+susceptible d'entamer la confiance du prospect avant même l'inscription.
+
+\subsection{R5 — Supprimer les sous-pages redondantes de la carte des vins}
+
+L'onglet \og{}Carte des vins digitale\fg{} du site propose trois déclinaisons~: \og{}Restaurant\fg{}, \og{}Bar à vins\fg{} et
+\og{}Caviste \& Boutique\fg{}. Chacune renvoie vers une page au contenu trop similaire à la page d'accueil,
+offrant peu d'informations nouvelles. C'est par ailleurs précisément sur ces pages que sont relégués
+les indicateurs d'impact métier et les témoignages clients évoqués en R1 et R2~: le prospect qui ne
+clique pas sur ces onglets ne les verra jamais. La recommandation est donc de supprimer ces
+sous-pages et de rapatrier leurs contenus utiles (indicateurs de ROI, témoignages) directement
+en section principale de la page d'accueil, conformément à R1 et R2.
+
+\subsection{R6 — Simplifier la présentation des tarifs}
+
+Une amélioration simple consisterait à refondre les tableaux tarifaires, qui paraissent aujourd'hui
+chargés en raison d'informations répétitives. Une présentation plus lisible pourrait reprendre, en
+lignes, les fonctionnalités proposées, et, en colonnes, les trois formules \og{}gratuit\fg{},
+\og{}mensuel\fg{} et \og{}annuel\fg{}, avec par exemple un symbole de type V ou X pour indiquer si chaque
+fonction est incluse~; ou simplement conserver la structure existante en ne mettant en avant que les 
+différences entre les formules (voir l'exemple en Annexe~\ref{annexe:tarifs}). 
+Cette structure réduirait la charge cognitive du prospect au moment où il
+compare les offres.
+
+Le plan annuel devrait également afficher explicitement l'économie réalisée~: payer 249,90\,€ par an
+au lieu de 299,88\,€ en mensualisé, soit 49,98\,€ d'économie. 
+Formuler ce gain directement (par exemple \og{}Plan annuel~: 249,90\,€, soit 49,98\,€ 
+économisés\fg{}) cadrerait l'offre annuelle comme une bonne affaire et orienterait 
+davantage de prospects vers la formule la plus engageante.
+
+\subsection{R7 — Alléger les champs et l'UX du formulaire d'inscription}
+Plusieurs leviers peuvent alléger l'étape d'inscription telle qu'elle a été décrite dans
+le diagnostic. Sur la création de compte classique, il serait d'abord pertinent de retirer
+les champs Prénom et Nom, qui ne sont d'aucune utilité immédiate pour activer l'outil et que
+l'utilisateur pourrait compléter plus tard depuis son profil. L'inscription se résumerait alors
+à une adresse email et un mot de passe. Le double champ de confirmation du mot de passe peut
+être remplacé par un simple bouton afficher/masquer, qui réduit la friction tout en permettant
+à l'utilisateur de vérifier sa saisie. Les règles de validité (longueur minimale de 8
+caractères, en particulier) gagneraient à être affichées avant la saisie plutôt qu'après, afin
+que l'utilisateur les respecte du premier coup au lieu d'avoir à corriger un message d'erreur.
+
+\subsection{R8 — Adopter un mécanisme d'authentification sans friction}
+
+Une option plus structurante pour l'inscription consisterait à supprimer le mot de passe à cette étape au profit
+d'un mécanisme sans mot de passe~: magic link envoyé par email, OTP à six chiffres, ou connexion
+par numéro de téléphone (approches déjà répandues dans des solutions comme Slack ou Notion).
+L'utilisateur n'aurait alors qu'un seul champ à remplir et la création du mot de passe peut être
+différée, ou remplacée par un autre mécanisme.
+
+Il faudrait également traiter les deux problèmes existants liés à la confirmation. D'une part,
+le bug du lien expiré alors qu'il vient d'être reçu.
+D'autre part, le fait que la vérification ne soit pas bloquante, même quand le lien fonctionne.
+Si le bug survient, l'utilisateur peut croire que l'inscription ne fonctionne pas et abandonner.
+Sans validation obligatoire, un utilisateur peut croire que n'importe qui peut créer un compte avec son adresse email.
+
+\subsection{R9 — Éviter les déconnexions systématiques après fermeture de la page}
+
+Un point de friction supplémentaire mérite d'être traité~: lorsqu'un utilisateur est déjà
+connecté, la fermeture de l'onglet ou du navigateur entraîne une déconnexion apparente, et
+il doit se reconnecter à chaque retour. Pour un restaurateur en service, ce comportement peut 
+être perçu comme pénible et peut dégrader l'usage quotidien de l'outil.
+
+Il serait pertinent d'introduire une persistance de session via cookie sécurisé afin de
+restaurer automatiquement la connexion pendant une durée définie (par exemple 7 à 30 jours),
+sauf déconnexion volontaire.
+
+\subsection{R10 — Alléger la création de l'établissement}
+
+Lorsque l'utilisateur crée un établissement, que ce soit lors de l'onboarding ou
+ultérieurement, il doit renseigner huit champs obligatoires~: nom, type, rue, numéro /
+boîte, pays, devise, ville et code postal. On peut légitimement s'interroger sur la
+nécessité de demander autre chose que le nom et le type. On pourrait supposer que ces
+informations servent à la facturation, mais l'examen du parcours montre qu'il n'en est
+rien~: selon l'entrepreneur, elles servent surtout à savoir où se situe le restaurant~;
+elles n'y conditionnent aucune fonctionnalité. La recommandation est
+donc de ne conserver que les deux champs essentiels avec éventuellement la possibilité
+de compléter les champs superflus ultérieurement ou de les garder comme optionnels.
+
+Le parcours alternatif le confirme directement~: les champs pourtant obligatoires dans la
+création classique y sont vides sans bloquer la génération du QR code ni aucune autre
+fonctionnalité. L'application fonctionne déjà sans ces informations~: leur caractère obligatoire
+n'est qu'une friction sans contrepartie fonctionnelle.
+
+\subsection{R11 — Lever le paywall sur l'import PDF}
+
+Le diagnostic a mis en évidence une incohérence difficilement justifiable~: l'import de la carte
+par PDF ou photo est verrouillé derrière le paywall dans le parcours classique, alors qu'il est
+librement accessible depuis la landing page via le parcours alternatif. C'est pourtant la
+méthode la plus naturelle pour un restaurateur qui dispose déjà d'une carte papier, et donc
+celle qui réduit au maximum la friction à l'encodage. La bloquer durant la période d'essai
+revient à contraindre l'utilisateur à recourir aux méthodes les plus longues au moment précis
+où il évalue si l'outil vaut son temps. Le fondateur a lui-même indiqué envisager d'étendre
+cet accès à tous les utilisateurs gratuits~: cette décision mérite d'être accélérée.
+
+\subsection{R12 — Rationaliser le parcours alternatif et corriger sa fragilité}
+
+Au-delà du paywall, le parcours alternatif mérite une réflexion plus large. En ne demandant
+qu'une adresse email, un nom d'établissement et un fichier, il génère nettement moins de
+friction que le parcours classique et s'aligne davantage sur le problème concret du restaurateur.
+On pourrait envisager de le mettre plus en avant sur la landing page, voire d'en faire le seul point
+d'entrée. Cette logique prolonge directement R7 et R8~: moins de champs, entrée plus
+rapide dans la valeur.
+
+Il resterait toutefois à corriger la fragilité de la phase de finalisation~: le lien email est
+l'unique porte d'accès au compte, et sa suppression accidentelle invalide l'import et le délai
+consentis. Une redirection automatique vers l'application en attendant le traitement du document,
+sans dépendre du lien email, supprimerait ce point de rupture, cela est cohérent avec la logique
+sans mot de passe évoquée en R8.
+
+\subsection{R13 — Transformer le chatbot en véritable canal de support}
+
+La plateforme d'administration (app.winevizer.com) intègre une interface de type chatbot qui laisse attendre une réponse
+immédiate~; en réalité, le message est simplement transmis au support, qui répond par email
+ultérieurement. Ce décalage est particulièrement dommageable aux moments de blocage.
+Il serait pertinent de configurer cet outil pour qu'il réponde automatiquement aux questions
+récurrentes (import de carte, génération du QR code, gestion des vins) et redirige vers
+un support humain pour les cas plus complexes ou sur demande explicite.
+
+\subsection{R14 — Corriger le bug d'import CSV}
+
+Un bug a été identifié lors des tests d'import par fichier CSV, y compris avec le fichier
+d'exemple fourni par Winevizer~: la première ligne est systématiquement ignorée par le
+convertisseur. Sur un fichier de six vins, seuls cinq sont importés, sans message d'erreur ni
+avertissement. L'utilisateur se retrouve avec une carte incomplète, peut-être même
+sans en avoir conscience directement s'il y a de nombreux vins.
+Ce comportement est caractéristique d'un convertisseur qui traite la première ligne comme un
+en-tête quel que soit son contenu~; une correction consisterait à proposer une case à cocher lors 
+de l'import pour indiquer si le fichier contient une ligne d'en-tête~: si oui, 
+la première ligne est ignorée, sinon elle est importée comme un vin.
+
+\subsection{R15 — Prévenir l'abus de la période d'essai}
+
+Ce conseil dépasse le périmètre de l'onboarding, mais la faille mérite d'être signalée.
+Le scénario est simple~: un utilisateur consomme intégralement son mois d'essai gratuit,
+supprime son compte, en recrée un avec la même adresse mail, réimporte sa carte des vins
+et repart pour un nouveau mois d'essai. Aucune traçabilité n'empêche aujourd'hui cette
+manipulation~: côté base de données, la suppression du compte efface toute mémoire de l'essai
+précédent, comme si l'utilisateur se présentait pour la première fois.
+
+Une correction d'effort minimal consisterait à conserver en base de données, indépendamment de la
+suppression du compte, l'adresse mail chiffrée de l'utilisateur de sorte 
+qu'elle puisse être utilisée pour vérifier si un essai a déjà été utilisé. 
+Ce marqueur persistant suffit à bloquer toute réactivation
+naïve de la période d'essai par les mêmes identifiants.
+
+\section{Conclusion}
+
+Ce rapport montre que Winevizer dispose d'un fit produit-marché solide~: son frein de
+croissance tient moins à l'offre qu'à la distance avant la première perception de valeur, aux
+frictions du parcours et incohérences qui en dégradent la qualité réelle, trois
+leviers qui ont orienté les recommandations formulées.
+
+Par souci de respecter la contrainte de dix pages, la gestion des échecs d'abonnement et
+la fidélisation des payants n'ont pu être traitées~: ce sont des prolongements naturels à
+envisager une fois le verrou de l'activation levé. Et même sur le seul périmètre de
+l'onboarding, certains angles mériteraient un approfondissement, notamment le délai de
+traitement IA, qui peut s'étendre sur plusieurs heures sans valeur intermédiaire délivrée,
+ou encore l'absence de guidage permettant à l'utilisateur de comprendre l'outil en attendant.
+
+
+\includepdf[pages=-]{media/back.pdf}
+
+\end{document}
